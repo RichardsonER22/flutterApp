@@ -4,6 +4,7 @@ import 'equipo_screen.dart';
 import 'entrenador_screen.dart';
 import 'estadio_screen.dart';
 import 'arbitro_screen.dart';
+import 'LoginScreen.dart'; // Asegúrate de importar tu pantalla de login
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -12,6 +13,15 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Bienvenido'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              _showLogoutConfirmationDialog(context);
+            },
+            tooltip: 'Cerrar sesión',
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -80,6 +90,38 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  // Función para mostrar el diálogo de confirmación
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: const Text('Confirmar cierre de sesión'),
+          content: const Text('¿Estás seguro de que deseas cerrar sesión?'),
+          actions: [
+            TextButton(
+              child: const Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(dialogContext).pop(); // Cierra el cuadro de diálogo
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Cerrar sesión'),
+              onPressed: () {
+                Navigator.of(dialogContext).pop(); // Cierra el cuadro de diálogo
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  (route) => false, // Elimina todas las rutas anteriores
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
