@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[800],
+        backgroundColor: const Color.fromARGB(255, 194, 218, 187),
         title: const Text(
           "Iniciar Sesión",
           style: TextStyle(fontWeight: FontWeight.bold),
