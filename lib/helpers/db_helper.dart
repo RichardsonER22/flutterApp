@@ -89,6 +89,7 @@ class DBHelper {
       experiencia INTEGER
     )
   ''');
+
   print("Tabla equipos creada.");
 }
 

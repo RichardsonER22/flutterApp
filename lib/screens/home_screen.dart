@@ -4,6 +4,7 @@ import 'equipo_screen.dart';
 import 'entrenador_screen.dart';
 import 'estadio_screen.dart';
 import 'arbitro_screen.dart';
+import 'calendario_screen.dart';
 import 'LoginScreen.dart'; // Asegúrate de importar tu pantalla de login
 
 class HomeScreen extends StatelessWidget {
@@ -84,6 +85,18 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ArbitroScreen()),
+                );
+              },
+            ),
+            _buildOptionCard(
+              context,
+              icon: Icons.calendar_month,
+              title: 'Calendario de partidos',
+              subtitle: 'Supervisa calendario de partidos.',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CalendarioScreen()),
                 );
               },
             ),
