@@ -12,17 +12,49 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bienvenido'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              _showLogoutConfirmationDialog(context);
-            },
-            tooltip: 'Cerrar sesión',
-          ),
-        ],
+        title: const Text('Pantalla de Inicio'),
+      ),
+      // Agregamos el Drawer a la pantalla principal
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            // Header del Drawer
+            UserAccountsDrawerHeader(
+              accountName: Text('Usuario'),
+              accountEmail: Text('usuario@ejemplo.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.person, size: 50),
+              ),
+            ),
+            // Botones del Drawer
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Perfil'),
+              onTap: () {
+                // Acción al hacer clic en el botón de perfil
+                Navigator.pushNamed(context, '/perfil');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Configuración'),
+              onTap: () {
+                // Acción al hacer clic en el botón de configuración
+                Navigator.pushNamed(context, '/configuracion');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Cerrar sesión'),
+              onTap: () {
+                // Acción al hacer clic en el botón de cerrar sesión
+                _showLogoutConfirmationDialog(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

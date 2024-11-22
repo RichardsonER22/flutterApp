@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/futbolistas': (context) => FutbolistaScreen(),
         '/equipos': (context) =>EquipoScreen(),
-        '/Arbitros': (context) =>ArbitroScreen()
+        '/Arbitros': (context) =>ArbitroScreen(),
        
 
       },
