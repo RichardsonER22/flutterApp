@@ -291,6 +291,39 @@ Future<int> deleteArbitro(int id) async {
 
     return result.isNotEmpty;
   }
+  // Método para actualizar la información del usuario
+Future<int> updateUser(Usuario usuario) async {
+  final db = await database;
+  try {
+    return await db.update(
+      'usuarios',
+      usuario.toMap(),
+      where: 'id = ?',
+      whereArgs: [usuario.id],
+    );
+  } catch (e) {
+    print("Error al actualizar usuario: $e");
+  }
+  return 0; // 0 indica que no se actualizó nada
+}
+
+// Método para obtener un usuario por su id
+Future<Usuario?> getUserById(int id) async {
+  final db = await database;
+  try {
+    final result = await db.query(
+      'usuarios',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    if (result.isNotEmpty) {
+      return Usuario.fromMap(result.first);
+    }
+  } catch (e) {
+    print("Error al obtener usuario por id: $e");
+  }
+  return null;
+}
 
   // Método para depuración
   Future<void> printTables() async {

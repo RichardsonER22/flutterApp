@@ -5,6 +5,7 @@ import 'screens/RegisterScreen.dart';
 import 'screens/home_screen.dart';
 import 'screens/futbolista_screen.dart';
 import 'screens/arbitro_screen.dart';
+import 'screens/perfil_screen.dart';
 
 
 void main() {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/futbolistas': (context) => FutbolistaScreen(),
         '/equipos': (context) =>EquipoScreen(),
         '/Arbitros': (context) =>ArbitroScreen(),
+         '/perfil': (context) => PerfilScreen(),
        
 
       },

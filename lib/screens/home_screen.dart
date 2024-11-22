@@ -37,14 +37,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/perfil');
               },
             ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Configuración'),
-              onTap: () {
-                // Acción al hacer clic en el botón de configuración
-                Navigator.pushNamed(context, '/configuracion');
-              },
-            ),
+          
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Cerrar sesión'),
