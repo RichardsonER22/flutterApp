@@ -1,48 +1,76 @@
 import 'package:flutter/material.dart';
-import '../helpers/db_helper.dart';
-import '../models/usuario.dart'; 
 import 'futbolista_screen.dart';
 import 'equipo_screen.dart';
 import 'entrenador_screen.dart';
 import 'estadio_screen.dart';
 import 'arbitro_screen.dart';
 import 'calendario_screen.dart';
-import 'tablaGoleador.dart';
-import 'tablaEquipos.dart';
-import 'tablaEntrenadores.dart';
-import 'tablaEstadios.dart';
 import 'tablaArbitros.dart';
+import 'tablaEntrenadores.dart';
+import 'tablaEquipos.dart';
+import'tablaEstadios.dart';
+import 'tablaGoleador.dart';
 import 'LoginScreen.dart'; // Asegúrate de importar tu pantalla de login
+import '../models/usuario.dart'; // Modelo de usuario
+import '../helpers/db_helper.dart'; // Helper para base de datos
 
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  Usuario? _usuario; // Permite valores nulos mientras se cargan los datos
 
-class HomeScreen extends StatelessWidget {
+  @override
+  void initState() {
+    super.initState();
+    _getUserData(); // Cargar los datos del usuario
+  }
+
+  // Método para obtener el usuario
+  Future<void> _getUserData() async {
+    try {
+      final usuario = await DBHelper().getUserById(1); // Cambia 1 por tu lógica para obtener el ID
+      setState(() {
+        _usuario = usuario;
+      });
+    } catch (e) {
+      // Manejo de errores
+      print('Error al obtener el usuario: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pantalla de Inicio'),
       ),
-      // Agregamos el Drawer a la pantalla principal
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             // Header del Drawer
             UserAccountsDrawerHeader(
-              accountName: Text('Usuario'),
-              accountEmail: Text('usuario@ejemplo.com'),
+              accountName: Text(
+                _usuario?.nombre ?? 'Cargando...', // Muestra el nombre o un texto de carga
+                style: const TextStyle(color: Colors.white),
+              ),
+              accountEmail: Text(
+                _usuario?.email ?? 'Cargando...', // Muestra el email o un texto de carga
+                style: const TextStyle(color: Colors.white70),
+              ),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Icon(Icons.person, size: 50),
               ),
             ),
-            // Botones del Drawer
+            // Opciones del Drawer
             ListTile(
               leading: Icon(Icons.person),
               title: Text('Perfil'),
               onTap: () {
-                // Acción al hacer clic en el botón de perfil
                 Navigator.pushNamed(context, '/perfil');
               },
             ),
@@ -96,17 +124,10 @@ ListTile(
     );
   },
 ),
-
-
-
-
-
-          
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Cerrar sesión'),
               onTap: () {
-                // Acción al hacer clic en el botón de cerrar sesión
                 _showLogoutConfirmationDialog(context);
               },
             ),
@@ -141,7 +162,7 @@ ListTile(
                 );
               },
             ),
-            _buildOptionCard(
+              _buildOptionCard(
               context,
               icon: Icons.school,
               title: 'Gestionar Entrenadores',
@@ -188,14 +209,13 @@ ListTile(
                   MaterialPageRoute(builder: (context) => CalendarioScreen()),
                 );
               },
-            ),
+            )
           ],
         ),
       ),
     );
   }
 
-  // Función para mostrar el diálogo de confirmación
   void _showLogoutConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,

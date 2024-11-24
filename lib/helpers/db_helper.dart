@@ -76,6 +76,24 @@ Future<List<Estadio>> getEstadiosOrdenadosPorCapacidad() async {
     );
     return result.map((e) => Arbitro.fromMap(e)).toList();
   }
+   Future<Usuario?> getUsuario() async {
+    final db = await database;
+    var result = await db.query('usuario', limit: 1);
+    if (result.isNotEmpty) {
+      return Usuario.fromMap(result.first);
+    }
+    return null;
+  }
+
+  Future<void> updateUsuario(Usuario usuario) async {
+    final db = await database;
+    await db.update(
+      'usuario',
+      usuario.toMap(),
+      where: 'id = ?',
+      whereArgs: [usuario.id],
+    );
+  }
 
 
 
