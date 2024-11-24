@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import '../helpers/db_helper.dart';
+import '../models/usuario.dart'; 
 import 'futbolista_screen.dart';
 import 'equipo_screen.dart';
 import 'entrenador_screen.dart';
 import 'estadio_screen.dart';
 import 'arbitro_screen.dart';
 import 'calendario_screen.dart';
+import 'tablaGoleador.dart';
+import 'tablaEquipos.dart';
+import 'tablaEntrenadores.dart';
+import 'tablaEstadios.dart';
+import 'tablaArbitros.dart';
 import 'LoginScreen.dart'; // Asegúrate de importar tu pantalla de login
+
+
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -37,6 +46,61 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/perfil');
               },
             ),
+            ListTile(
+  leading: Icon(Icons.sports_soccer),
+  title: Text('Tabla de Goleadores'),
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ClasificacionScreen()),
+    );
+  },
+),
+ListTile(
+  leading: Icon(Icons.sports_score),
+  title: Text('Clasificación de Equipos'),
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ClasificacionEquiposScreen()),
+    );
+  },
+),
+ListTile(
+  leading: Icon(Icons.school),
+  title: Text('Clasificación de Entrenadores'),
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ClasificacionEntrenadoresScreen()),
+    );
+  },
+),
+ListTile(
+  leading: Icon(Icons.stadium),
+  title: Text('Clasificación de Estadios'),
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ClasificacionEstadiosScreen()),
+    );
+  },
+),
+ListTile(
+  leading: Icon(Icons.gavel),
+  title: Text('Clasificación de Árbitros'),
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ClasificacionArbitrosScreen()),
+    );
+  },
+),
+
+
+
+
+
           
             ListTile(
               leading: Icon(Icons.exit_to_app),

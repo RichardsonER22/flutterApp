@@ -33,6 +33,53 @@ class DBHelper {
     );
   }
 
+  Future<List<Futbolista>> getFutbolistasOrdenadosPorGoles() async {
+    final db = await database; // Obtén la referencia a la base de datos
+    var result = await db.query(
+      'futbolistas',
+      orderBy: 'goles DESC', // Ordenar por goles en orden descendente
+    );
+    return result.map((e) => Futbolista.fromMap(e)).toList();
+  }
+
+  Future<List<Equipo>> getEquiposOrdenadosPorTitulos() async {
+    final db = await database; // Obtén la referencia a la base de datos
+    var result = await db.query(
+      'equipos', // Nombre de la tabla donde almacenas los equipos
+      orderBy: 'titulos DESC', // Ordenar por títulos en orden descendente
+    );
+    return result.map((e) => Equipo.fromMap(e)).toList();
+  }
+
+  Future<List<Entrenador>> getEntrenadoresOrdenadosPorExperiencia() async {
+    final db = await database; // Obtén la referencia a la base de datos
+    var result = await db.query(
+      'entrenadores',
+      orderBy: 'experiencia DESC', // Ordenar por años de experiencia en orden descendente
+    );
+    return result.map((e) => Entrenador.fromMap(e)).toList();
+  }
+Future<List<Estadio>> getEstadiosOrdenadosPorCapacidad() async {
+    final db = await database; // Obtén la referencia a la base de datos
+    var result = await db.query(
+      'estadios',
+      orderBy: 'capacidad DESC', // Ordenar por capacidad en orden descendente
+    );
+    return result.map((e) => Estadio.fromMap(e)).toList();
+  }
+  
+  Future<List<Arbitro>> getArbitrosOrdenadosPorExperiencia() async {
+    final db = await database; // Obtener la referencia a la base de datos
+    var result = await db.query(
+      'arbitros',
+      orderBy: 'experiencia DESC', // Ordenar por años de experiencia en orden descendente
+    );
+    return result.map((e) => Arbitro.fromMap(e)).toList();
+  }
+
+
+
+
   // Crear las tablas al inicializar la base de datos
   Future<void> _createDB(Database db, int version) async {
   print("Creando las tablas...");
